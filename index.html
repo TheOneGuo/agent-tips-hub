@@ -61,12 +61,12 @@ button{font-family:inherit}
 /* ---------- START NAV ---------- */
 .start h2{font-size:16.5px;margin-bottom:4px;color:#e8e8ff}
 .start .fhint{font-size:13px;color:#9aa0c7;margin-bottom:14px}
-.ftiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px;margin-bottom:4px}
-.ftile{position:relative;border-radius:var(--radius);border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.055);padding:14px 15px 12px;cursor:pointer;transition:.18s;text-align:left;color:#fff;width:100%}
+.ftiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;margin-bottom:4px}
+.ftile{position:relative;border-radius:11px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.055);padding:11px 12px 10px;cursor:pointer;transition:.18s;text-align:left;color:#fff;width:100%}
 .ftile:hover,.ftile.open,.ftile:focus-visible{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.1)}
-.ftile .f-ico{font-size:20px;line-height:1}
-.ftile .f-name{font-weight:700;font-size:13.5px;margin-top:8px;line-height:1.4}
-.ftile .f-meta{font-size:11px;color:#9aa0c7;margin-top:3px}
+.ftile .f-ico{font-size:18px;line-height:1}
+.ftile .f-name{font-weight:700;font-size:12.8px;margin-top:6px;line-height:1.4}
+.ftile .f-meta{font-size:10.5px;color:#9aa0c7;margin-top:2px}
 .fpop{position:absolute;left:6px;right:6px;top:calc(100% + 8px);z-index:80;background:rgba(13,15,31,.97);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:10px;box-shadow:0 18px 44px -12px rgba(0,0,0,.65);display:none}
 .ftile.open .fpop{display:block}
 .fpop .fstep{display:flex;width:100%;align-items:center;gap:7px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;color:#dfe2ff;font-size:12.5px;padding:7px 10px;cursor:pointer;margin-bottom:6px;text-align:left;transition:.15s}
@@ -74,9 +74,6 @@ button{font-family:inherit}
 .fpop .fstep .num{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.14);color:#c7cbff;font-size:10.5px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex:none}
 .fpop .f-all{width:100%;background:none;border:1px dashed rgba(255,255,255,.28);border-radius:8px;color:#c7cbff;font-size:12px;padding:7px;cursor:pointer;text-align:center;transition:.15s}
 .fpop .f-all:hover{color:#fff;border-color:rgba(255,255,255,.5)}
-.more{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
-.more .mlabel{font-size:12.5px;color:#9aa0c7;margin-right:2px}
-.more .qbtn{padding:7px 13px;font-size:12.5px}
 
 /* ---------- STATS ---------- */
 .stats{max-width:1120px;margin:-26px auto 0;padding:0 24px;position:relative;z-index:2}
@@ -118,7 +115,7 @@ select{padding:10px 13px;border:1.5px solid var(--line);border-radius:11px;font-
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:.2s;animation:pop .25s ease both;position:relative;overflow:hidden}
 .card::before{content:"";position:absolute;top:0;left:20px;width:34px;height:3px;border-radius:0 0 3px 3px;background:var(--cc,var(--accent));opacity:.9}
 @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){.card{animation:none}.card,.qbtn{transition:none}}
+@media(prefers-reduced-motion:reduce){.card{animation:none}.card{transition:none}}
 .card:hover{transform:translateY(-2px);box-shadow:0 4px 8px rgba(20,24,60,.08),0 16px 32px -14px rgba(20,24,60,.22);border-color:var(--accent)}
 .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;gap:8px}
 .cat-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink2);min-width:0}
@@ -182,7 +179,7 @@ footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5
 
     <div class="start">
       <h2>我从这里开始 ↓ 点流程块直达场景，悬停查看全部步骤</h2>
-      <p class="fhint">第 0 步建议每个任务开工前先做。悬停流程块展开步骤浮层：点步骤筛选该环节技巧，点「全部」看整个场景；触屏设备点一下展开。</p>
+      <p class="fhint">第 0 步建议每个任务开工前先做。悬停流程块展开步骤浮层：点步骤筛选该环节技巧，点「全部」看整个场景；无流程的场景点击内容块直达。触屏设备点按展开。</p>
       <details class="gstep">
         <summary>⭐ 第 0 步 · 黄金深度提示词 —— 任何任务开工前，先让 AI 把任务升维到专家水准<span class="arr">▶</span></summary>
         <div class="gbody">
@@ -200,7 +197,6 @@ footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5
         </div>
       </details>
       <div id="flowList"></div>
-      <div class="more" id="moreCats"></div>
     </div>
   </div>
 </header>
@@ -848,29 +844,37 @@ function copyText(btn,id){
   });
 }
 
-/* start nav：流程块=直达场景（悬停/点按展开步骤浮层），步骤=筛选该环节技巧 */
-const MORE = [["🛡️ 验收审查","verify"],["🤖 自动化定时","auto"],["🧠 方法论心法","method"],["🎯 目标拆解","plan"],["✍️ 通用写作","write"],["🎨 演示汇报","present"],["🔍 研究调研","research"],["🗂️ 上下文管理","context"]];
-document.getElementById("flowList").innerHTML = FLOWS.map((f,i)=>{
-  const icon = f.name.split(" ")[0], label = f.name.replace(/^\S+\s/,"");
-  return `<div class="ftile" data-i="${i}" tabindex="0" role="button" aria-expanded="false" aria-haspopup="true">
+/* start nav：17 个场景全部内容块；流程块悬停展开步骤浮层，其余直达 */
+const MORE = ["verify","auto","method","plan","write","present","research","context"];
+document.getElementById("flowList").innerHTML =
+  FLOWS.map((f,i)=>{
+    const icon = f.name.split(" ")[0], label = f.name.replace(/^\S+\s/,"");
+    return `<div class="ftile" data-flow="${i}" tabindex="0" role="button" aria-expanded="false" aria-haspopup="true">
     <div class="f-ico">${icon}</div>
     <div class="f-name">${label}</div>
-    <div class="f-meta">${f.steps.length} 个步骤 · 点击直达场景</div>
+    <div class="f-meta">${f.steps.length} 步 · 悬停展开</div>
     <div class="fpop" role="menu">
       ${f.steps.map((s,j)=>`<button class="fstep" onclick="event.stopPropagation();goStep('${s[1]}','${s[2]}')" title="筛选出「${s[2]}」相关技巧"><span class="num">${j+1}</span>${s[0]}</button>`).join("")}
       <button class="f-all" onclick="event.stopPropagation();goCat('${f.cat}')">查看该场景全部技巧 →</button>
     </div>
   </div>`;
-}).join("");
-document.getElementById("moreCats").innerHTML = `<span class="mlabel">更多直达：</span>` + MORE.map(m=>`<button class="qbtn" onclick="goCat('${m[1]}')">${m[0]}</button>`).join("");
+  }).join("") +
+  MORE.map(cid=>{
+    const c = CATS.find(x=>x.id===cid);
+    return `<div class="ftile" tabindex="0" role="button" onclick="goCat('${cid}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goCat('${cid}')}">
+    <div class="f-ico">${c.icon}</div>
+    <div class="f-name">${c.name}</div>
+    <div class="f-meta">直达 · ${countByCat[cid]||0} 条技巧</div>
+  </div>`;
+  }).join("");
 
 /* 流程块交互：悬停延迟展开防误触，浮层内操作不关闭；触屏点按展开 */
 (function(){
   const noHover = window.matchMedia && matchMedia("(hover: none)").matches;
   const closeTile = t=>{t.classList.remove("open");t.setAttribute("aria-expanded","false");};
   const closeAll = except=>{document.querySelectorAll(".ftile.open").forEach(t=>{if(t!==except)closeTile(t);});};
-  document.querySelectorAll(".ftile").forEach(tile=>{
-    const f = FLOWS[+tile.dataset.i];
+  document.querySelectorAll(".ftile[data-flow]").forEach(tile=>{
+    const f = FLOWS[+tile.dataset.flow];
     const open = ()=>{closeAll(tile);tile.classList.add("open");tile.setAttribute("aria-expanded","true");};
     if(!noHover){
       let ht,ct;
