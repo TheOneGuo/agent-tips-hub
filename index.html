@@ -31,9 +31,9 @@ button{font-family:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
 
 /* ---------- HERO ---------- */
-.hero{background:radial-gradient(1100px 560px at 85% -10%,rgba(124,58,237,.32),transparent 60%),radial-gradient(900px 480px at 5% 112%,rgba(79,70,229,.26),transparent 55%),linear-gradient(140deg,#0f1226,#1e1b4b);color:#fff;padding:44px 24px 54px;position:relative;overflow:hidden}
+.hero{background:radial-gradient(1100px 560px at 85% -10%,rgba(124,58,237,.32),transparent 60%),radial-gradient(900px 480px at 5% 112%,rgba(79,70,229,.26),transparent 55%),linear-gradient(140deg,#0f1226,#1e1b4b);color:#fff;padding:44px 24px 54px;position:relative}
 .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,#000 30%,transparent);pointer-events:none}
-.hero-in{max-width:1120px;margin:0 auto;position:relative;z-index:1}
+.hero-in{max-width:1120px;margin:0 auto;position:relative;z-index:5}
 .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);padding:6px 14px;border-radius:999px;font-size:13px;color:#dcd9ff}
 .badge .dot{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399}
 .hero h1{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.5px;margin:20px 0 12px;line-height:1.25}
@@ -61,16 +61,19 @@ button{font-family:inherit}
 /* ---------- START NAV ---------- */
 .start h2{font-size:16.5px;margin-bottom:4px;color:#e8e8ff}
 .start .fhint{font-size:13px;color:#9aa0c7;margin-bottom:14px}
-.flow{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:var(--radius);padding:12px 15px;display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:10px;transition:.2s}
-.flow:hover{border-color:rgba(255,255,255,.35)}
-.flow .fname{font-weight:700;font-size:13.5px;min-width:118px;display:inline-flex;align-items:center;gap:6px;color:#fff;background:none;border:none;cursor:pointer;padding:0;text-align:left}
-.flow .fname:hover{color:#c7cbff}
-.flow .fname .all{font-weight:400;font-size:11.5px;color:#9aa0c7}
-.flow-steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.fstep{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:#dfe2ff;font-size:12.5px;cursor:pointer;transition:.15s}
-.fstep:hover{border-color:rgba(255,255,255,.45);color:#fff;transform:translateY(-1px)}
-.fstep .num{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.14);color:#c7cbff;font-size:10.5px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex:none}
-.farrow{color:#8a90c0;font-size:11px;user-select:none}
+.ftiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px;margin-bottom:4px}
+.ftile{position:relative;border-radius:var(--radius);border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.055);padding:14px 15px 12px;cursor:pointer;transition:.18s;text-align:left;color:#fff;width:100%}
+.ftile:hover,.ftile.open,.ftile:focus-visible{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.1)}
+.ftile .f-ico{font-size:20px;line-height:1}
+.ftile .f-name{font-weight:700;font-size:13.5px;margin-top:8px;line-height:1.4}
+.ftile .f-meta{font-size:11px;color:#9aa0c7;margin-top:3px}
+.fpop{position:absolute;left:6px;right:6px;top:calc(100% + 8px);z-index:80;background:rgba(13,15,31,.97);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:10px;box-shadow:0 18px 44px -12px rgba(0,0,0,.65);display:none}
+.ftile.open .fpop{display:block}
+.fpop .fstep{display:flex;width:100%;align-items:center;gap:7px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;color:#dfe2ff;font-size:12.5px;padding:7px 10px;cursor:pointer;margin-bottom:6px;text-align:left;transition:.15s}
+.fpop .fstep:hover{background:rgba(255,255,255,.14);color:#fff}
+.fpop .fstep .num{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.14);color:#c7cbff;font-size:10.5px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.fpop .f-all{width:100%;background:none;border:1px dashed rgba(255,255,255,.28);border-radius:8px;color:#c7cbff;font-size:12px;padding:7px;cursor:pointer;text-align:center;transition:.15s}
+.fpop .f-all:hover{color:#fff;border-color:rgba(255,255,255,.5)}
 .more{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
 .more .mlabel{font-size:12.5px;color:#9aa0c7;margin-right:2px}
 .more .qbtn{padding:7px 13px;font-size:12.5px}
@@ -178,8 +181,8 @@ footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5
     </div>
 
     <div class="start">
-      <h2>我从这里开始 ↓ 点流程名直达场景全部技巧，点步骤筛选该环节技巧</h2>
-      <p class="fhint">建议先看第 0 步；每条流程从左到右走完即交付。</p>
+      <h2>我从这里开始 ↓ 点流程块直达场景，悬停查看全部步骤</h2>
+      <p class="fhint">第 0 步建议每个任务开工前先做。悬停流程块展开步骤浮层：点步骤筛选该环节技巧，点「全部」看整个场景；触屏设备点一下展开。</p>
       <details class="gstep">
         <summary>⭐ 第 0 步 · 黄金深度提示词 —— 任何任务开工前，先让 AI 把任务升维到专家水准<span class="arr">▶</span></summary>
         <div class="gbody">
@@ -270,7 +273,7 @@ const FLOWS = [
   {name:"📕 知乎回答", cat:"zhihu", steps:[["定位问题","zhihu","知乎"],["五段结构","zhihu","五段"],["写作成稿","zhihu","回答"],["植入与转化","zhihu","植入"],["来源核验","research","溯源"]]},
   {name:"🎬 AI 短视频", cat:"film", steps:[["脚本拆解","film","口播稿"],["分镜设计","film","分镜"],["批量生图","film","生图"],["生成视频","film","语义建构"],["配音剪辑","film","剪辑"]]},
   {name:"🎥 AI 电影", cat:"aimovie", steps:[["可拍摄脚本","aimovie","脚本"],["分镜表","aimovie","分镜表"],["角色资产","aimovie","角色"],["镜头与声音","aimovie","声音"],["观众盲审","aimovie","观众"]]},
-  {name:"💻 AI 编码", cat:"code", steps:[["理解与计划","code","探索"],["规范与实现","code","CLAUDE.md"],["验证闭环","verify","验证"],["对抗审查","verify","对抗"],["交付出示证据","verify","证据"]]},
+  {name:"💻 AI 编程与开发", cat:"code", steps:[["理解与计划","code","探索"],["规范与实现","code","CLAUDE.md"],["验证闭环","verify","验证"],["对抗审查","verify","对抗"],["交付出示证据","verify","证据"]]},
   {name:"⚖️ 合同审查", cat:"legal", steps:[["脱敏处理","legal","脱敏"],["三层检查","legal","三层法"],["条款标注","legal","条款"],["风险识别","legal","风险"],["修改确认","verify","修复"]]},
   {name:"📊 数据分析", cat:"data", steps:[["一手数据","data","一手"],["分析指令","data","表格分析"],["结论结构","data","结论"],["复算核验","data","复算"],["汇报升维","present","升维"]]},
   {name:"📣 广告投放", cat:"ads", steps:[["素材生成","ads","素材"],["禁词自检","ads","禁词"],["A/B 测试","ads","A/B"],["DCO 量产","ads","DCO"],["自动周报","auto","周报"]]}
@@ -845,12 +848,48 @@ function copyText(btn,id){
   });
 }
 
-/* start nav：流程名=直达场景，步骤=筛选该环节技巧 */
+/* start nav：流程块=直达场景（悬停/点按展开步骤浮层），步骤=筛选该环节技巧 */
 const MORE = [["🛡️ 验收审查","verify"],["🤖 自动化定时","auto"],["🧠 方法论心法","method"],["🎯 目标拆解","plan"],["✍️ 通用写作","write"],["🎨 演示汇报","present"],["🔍 研究调研","research"],["🗂️ 上下文管理","context"]];
-document.getElementById("flowList").innerHTML = FLOWS.map(f=>
-  `<div class="flow"><button class="fname" onclick="goCat('${f.cat}')">${f.name} <span class="all">全部 →</span></button><span class="flow-steps">${f.steps.map((s,i)=>`${i?'<span class="farrow">→</span>':''}<button class="fstep" onclick="goStep('${s[1]}','${s[2]}')" title="筛选出「${s[2]}」相关技巧"><span class="num">${i+1}</span>${s[0]}</button>`).join("")}</span></div>`
-).join("");
+document.getElementById("flowList").innerHTML = FLOWS.map((f,i)=>{
+  const icon = f.name.split(" ")[0], label = f.name.replace(/^\S+\s/,"");
+  return `<div class="ftile" data-i="${i}" tabindex="0" role="button" aria-expanded="false" aria-haspopup="true">
+    <div class="f-ico">${icon}</div>
+    <div class="f-name">${label}</div>
+    <div class="f-meta">${f.steps.length} 个步骤 · 点击直达场景</div>
+    <div class="fpop" role="menu">
+      ${f.steps.map((s,j)=>`<button class="fstep" onclick="event.stopPropagation();goStep('${s[1]}','${s[2]}')" title="筛选出「${s[2]}」相关技巧"><span class="num">${j+1}</span>${s[0]}</button>`).join("")}
+      <button class="f-all" onclick="event.stopPropagation();goCat('${f.cat}')">查看该场景全部技巧 →</button>
+    </div>
+  </div>`;
+}).join("");
 document.getElementById("moreCats").innerHTML = `<span class="mlabel">更多直达：</span>` + MORE.map(m=>`<button class="qbtn" onclick="goCat('${m[1]}')">${m[0]}</button>`).join("");
+
+/* 流程块交互：悬停延迟展开防误触，浮层内操作不关闭；触屏点按展开 */
+(function(){
+  const noHover = window.matchMedia && matchMedia("(hover: none)").matches;
+  const closeTile = t=>{t.classList.remove("open");t.setAttribute("aria-expanded","false");};
+  const closeAll = except=>{document.querySelectorAll(".ftile.open").forEach(t=>{if(t!==except)closeTile(t);});};
+  document.querySelectorAll(".ftile").forEach(tile=>{
+    const f = FLOWS[+tile.dataset.i];
+    const open = ()=>{closeAll(tile);tile.classList.add("open");tile.setAttribute("aria-expanded","true");};
+    if(!noHover){
+      let ht,ct;
+      tile.addEventListener("mouseenter",()=>{clearTimeout(ct);ht=setTimeout(open,160);});
+      tile.addEventListener("mouseleave",()=>{clearTimeout(ht);ct=setTimeout(()=>closeTile(tile),260);});
+    }
+    tile.addEventListener("focus",open);
+    tile.addEventListener("click",e=>{
+      if(e.target.closest(".fpop"))return;
+      if(noHover){ tile.classList.contains("open") ? closeTile(tile) : open(); }
+      else goCat(f.cat);
+    });
+    tile.addEventListener("keydown",e=>{
+      if(e.key==="Escape"){closeTile(tile);}
+      else if(e.key==="Enter"||e.key===" "){e.preventDefault();goCat(f.cat);}
+    });
+  });
+  document.addEventListener("click",e=>{ if(!e.target.closest(".ftile")) closeAll(null); });
+})();
 
 /* stats */
 document.getElementById("statsBar").innerHTML =
