@@ -206,13 +206,17 @@ html[data-theme="dark"] .blk-src .lb{color:#67e8f9}
 .libtools input:focus{outline:none;border-color:var(--accent)}
 .libcount{font-size:12px;color:var(--ink3);margin-left:auto;align-self:center}
 
-/* 流程块筛选 chips */
-.libchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.libchips .lc{font-size:11.8px;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--ink2);border-radius:777px;padding:4px 10px;cursor:pointer;line-height:1.5;white-space:nowrap}
-.libchips .lc:hover{border-color:var(--accent);color:var(--accent)}
-.libchips .lc.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.libchips .lc .n{opacity:.65;font-weight:700;margin-left:3px}
-.libchips .lc.on .n{opacity:.9}
+/* 当前流程块指示条 */
+.libnow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;padding:9px 12px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;background:var(--bg);font-size:12.6px;color:var(--ink2);line-height:1.6}
+.libnow .nm{font-weight:800;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.libnow .num{font-weight:800;color:var(--accent)}
+.libnow .sw{margin-left:auto;font-size:11.8px;font-weight:700;color:var(--accent);background:none;border:none;padding:0;cursor:pointer}
+.libnow .sw:hover{text-decoration:underline}
+.libnow.ph{border-left-color:var(--ink3);color:var(--ink3)}
+.libnow.ph b{color:var(--ink2)}
+.libempty{text-align:center;padding:26px 16px;color:var(--ink3);font-size:12.8px}
+.libempty .big{font-size:28px;margin-bottom:6px}
+.libempty button{margin-top:10px;border:1px solid var(--accent);color:var(--accent);background:none;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer}
 
 /* 按流程块分组 */
 .libgroup{margin-top:16px;border-top:1px dashed var(--line);padding-top:12px}
@@ -317,7 +321,7 @@ footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5
   <nav class="groups" id="groupTabs" aria-label="场景分组"></nav>
   <div class="chips" id="catChips" aria-label="分类筛选"></div>
   <div class="chips" id="agentChips" aria-label="平台筛选"></div>
-  <div class="meta"><span id="countTxt"></span><span>💡 每张卡片含「使用场景 / 方法 / 实战技巧」；点流程块看该块的 Skills · 案例 · 数据源</span></div>
+  <div class="meta"><span id="countTxt"></span><span>💡 每张卡片含「使用场景 / 方法 / 实战技巧」；选中流程块后，下方三库只显示该块的资源</span></div>
 </div>
 
 <!-- ============ GRID ============ -->
@@ -328,16 +332,16 @@ footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5
   <div class="fp" id="fpBox"></div>
 </div>
 
-<!-- ============ 资源库：按流程块归属的 Skills / 案例 / 数据源 ============ -->
+<!-- ============ 资源库：跟随上方选中的流程块 ============ -->
 <section class="libsec" id="libSkills">
   <header>
     <h2>🧰 Skills 库</h2>
-    <span class="lh">按流程块归属：每个技能都挂在它真正服务的流程上，点流程块也能直接看到</span>
+    <span class="lh">只显示当前选中流程块的技能；切换流程块，这里跟着变</span>
     <span class="libcount" id="libCountSkills"></span>
   </header>
   <div class="lbox">
-    <div class="libtools"><input id="qSkills" type="text" aria-label="搜索技能" placeholder="搜技能，如：合同 / 爆文 / 分镜 / 复盘 / 体检…"><span class="libcount" id="libHitSkills"></span></div>
-    <div class="libchips" id="chipsSkills"></div>
+    <div class="libnow" id="nowSkills"></div>
+    <div class="libtools"><input id="qSkills" type="text" aria-label="搜索技能" placeholder="在当前流程块内搜技能，如：封面 / 拆解 / 复盘…"><span class="libcount" id="libHitSkills"></span></div>
     <div id="gridSkills"></div>
   </div>
 </section>
@@ -345,12 +349,12 @@ footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5
 <section class="libsec" id="libCases">
   <header>
     <h2>📚 场景与案例库</h2>
-    <span class="lh">来自头条、知乎、小红书、V2EX 等社区的一手复盘，按流程块归档</span>
+    <span class="lh">只显示当前选中流程块的案例；切换流程块，这里跟着变</span>
     <span class="libcount" id="libCountCases"></span>
   </header>
   <div class="lbox">
-    <div class="libtools"><input id="qCases" type="text" aria-label="搜索案例" placeholder="搜案例，如：多 Agent / 合同 / 私域 / 滞销 / 仲裁…"><span class="libcount" id="libHitCases"></span></div>
-    <div class="libchips" id="chipsCases"></div>
+    <div class="libnow" id="nowCases"></div>
+    <div class="libtools"><input id="qCases" type="text" aria-label="搜索案例" placeholder="在当前流程块内搜案例，如：多 Agent / 合同 / 私域…"><span class="libcount" id="libHitCases"></span></div>
     <div id="gridCases"></div>
   </div>
 </section>
@@ -358,12 +362,12 @@ footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5
 <section class="libsec" id="libSources">
   <header>
     <h2>🔌 数据源与工具箱</h2>
-    <span class="lh">每个流程块去哪儿找数据、用什么工具，按块归档</span>
+    <span class="lh">只显示当前选中流程块的数据源；切换流程块，这里跟着变</span>
     <span class="libcount" id="libCountSources"></span>
   </header>
   <div class="lbox">
-    <div class="libtools"><input id="qSources" type="text" aria-label="搜索数据源" placeholder="搜工具，如：Power Query / 即梦 / 企微 / 裁判文书…"><span class="libcount" id="libHitSources"></span></div>
-    <div class="libchips" id="chipsSources"></div>
+    <div class="libnow" id="nowSources"></div>
+    <div class="libtools"><input id="qSources" type="text" aria-label="搜索数据源" placeholder="在当前流程块内搜工具，如：即梦 / 企微 / 裁判文书…"><span class="libcount" id="libHitSources"></span></div>
     <div id="gridSources"></div>
   </div>
 </section>
@@ -4199,12 +4203,15 @@ function setCat(c){state.cat=c;buildChips();render();}
 function setAgent(a){state.agent=a;buildChips();render();}
 function resetAll(){state={group:"",cat:"",agent:"",lvl:"",q:""};document.getElementById("q").value="";document.getElementById("lvl").value="";buildTabs();buildChips();render();}
 function searchEverywhere(){state.group="";state.cat="";state.agent="";state.lvl="";document.getElementById("lvl").value="";buildTabs();buildChips();render();}
-function goCat(cat){
+function selectBlock(cat){
   const c = CATS.find(x=>x.id===cat);
   state.group = c ? c.g : ""; state.cat = cat; state.agent=""; state.lvl="";
   document.getElementById("lvl").value="";
   state.q=""; document.getElementById("q").value="";
   buildTabs();buildChips();render();
+}
+function goCat(cat){
+  selectBlock(cat);
   document.getElementById("kbTop").scrollIntoView({behavior:"smooth"});
 }
 function goStep(cat,kw){
@@ -4240,7 +4247,7 @@ function blk(cls,icon,label,body){
 }
 function render(){
   const list = filtered();
-  document.getElementById("countTxt").innerHTML = `共 <b>${TIPS.length}</b> 条技巧 · 当前显示 <b>${list.length}</b> 条`;
+  document.getElementById("countTxt").innerHTML = `共 <b>${TIPS.length}</b> 条技巧 · 当前显示 <b>${list.length}</b> 条` + (state.cat?" · 资源库已同步该流程块":"");
   if(!list.length){
     const hasQ = state.q.trim().length>0;
     const act=[];
@@ -4252,6 +4259,7 @@ function render(){
     grid.innerHTML = hasQ
       ? `<div class="empty"><div class="big">🔍</div>当前筛选范围内没有匹配的技巧${actTxt}<br><button class="chip" style="margin-top:14px;border-color:var(--accent);color:var(--accent)" onclick="searchEverywhere()">在全部 ${TIPS.length} 条技巧中搜索「${esc(state.q.trim())}」</button></div>`
       : `<div class="empty"><div class="big">🔍</div>当前筛选组合下没有技巧${actTxt}<br><button class="chip" style="margin-top:14px;border-color:var(--accent);color:var(--accent)" onclick="resetAll()">↺ 重置全部筛选</button></div>`;
+    libRender();
     return;
   }
   grid.innerHTML = list.map((t,i)=>{
@@ -4274,6 +4282,7 @@ function render(){
       <div class="ex" id="${id}"><button class="copy-btn" onclick="copyText(this,'${id}')">复制</button>${esc(t.p)}</div>`:""}
     </article>`;
   }).join("");
+  libRender();
 }
 function toggleEx(id){const el=document.getElementById(id);const btn=el.previousElementSibling;el.classList.toggle("show");btn.textContent=(el.classList.contains("show")?"▾ 收起示例":"▸ 查看示例提示词");}
 function copyText(btn,id){
@@ -4308,6 +4317,7 @@ function openFlow(i){
   const sk = SKILLS.filter(x=>inC(x,f.cat));
   const ca = CASES.filter(x=>inC(x,f.cat));
   const so = SOURCES.filter(x=>inC(x,f.cat));
+  selectBlock(f.cat);
   const steps = f.steps? `<div class="fp-sec"><h4>🧭 流程步骤（点一下筛出该环节技巧）</h4><div class="fp-steps">${f.steps.map((s,j)=>`<span style="cursor:pointer" onclick="closeFlow();goStep('${s[1]}','${s[2]}')"><b style="color:var(--accent)">${j+1}</b> ${esc(s[0])}</span>`).join("")}</div></div>` : "";
   const libSk = sk.length? `<div class="fp-lib">${sk.slice(0,6).map(x=>`<div class="fi"><h5>🧩 ${esc(x.n)}</h5><div class="fs">${esc(x.w)}</div><div class="fm">输出：${esc(x.o)}　·　${esc(x.p)}</div></div>`).join("")}</div>` : `<div class="fp-libempty">暂无专属技能</div>`;
   const libCa = ca.length? `<div class="fp-lib">${ca.slice(0,4).map(x=>`<div class="fi"><h5><span class="cnt" style="font-size:10.5px;background:var(--atag-bg);color:var(--atag-ink);border-radius:5px;padding:1px 6px;margin-right:4px">${esc(x.ind)}</span>${esc(x.sc)}</h5><div class="fs">${esc(x.how)}</div><div class="fm">结果：${esc(x.res)}　·　来源：${esc(x.src)}</div></div>`).join("")}</div>` : `<div class="fp-libempty">暂无专属案例</div>`;
@@ -4326,8 +4336,8 @@ function openFlow(i){
     <div class="fp-sec"><h4>🔌 这个流程块的数据源与工具（${so.length}）</h4>${libSo}</div>
     ${fc?`<div class="fp-sec"><h4>⚠️ 避坑要点</h4><ul>${fc.pit.split(";").map(x=>`<li>${esc(x.trim())}</li>`).join("")}</ul></div>`:""}
     <div class="fp-go">
-      <button onclick="closeFlow();goCat('${f.cat}')">📂 查看该场景全部 ${countByCat[f.cat]||0} 条技巧</button>
-      <button onclick="closeFlow();libJump('skills','${f.cat}')">🧰 在 Skills 库查看全部 ${sk.length} 个</button>
+      <button onclick="closeFlow();goCat('${f.cat}')">📂 选中该流程块并查看 ${countByCat[f.cat]||0} 条技巧</button>
+      <button onclick="closeFlow();libJump('skills','${f.cat}')">🧰 选中并查看它的 ${sk.length} 个 Skills</button>
       <button onclick="closeFlow()">关闭</button>
     </div>`;
   document.getElementById("fpMask").classList.add("show");
@@ -4364,98 +4374,69 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeFlow();});
   document.addEventListener("click",e=>{ if(!e.target.closest(".ftile")) closeAll(null); });
 })();
 
-/* ===== 资源库：按流程块归属渲染（Skills / 案例 / 数据源） ===== */
-const libState={skills:"",cases:"",sources:""};
+/* ===== 资源库：跟随上方选中的流程块（state.cat）渲染 ===== */
 function blockMeta(cat){
-  const c=CATS.find(x=>x.id===cat)||{name:cat,icon:"•",color:"#64748b"};
-  return c;
+  return CATS.find(x=>x.id===cat)||{id:cat,name:cat,icon:"•",color:"#64748b"};
 }
-function buildLibChips(kind,list){
-  const box=document.getElementById("chips"+kind[0].toUpperCase()+kind.slice(1));
-  if(!box)return;
-  const cnt={}; list.forEach(x=>{(Array.isArray(x.c)?x.c:[x.c]).forEach(c=>cnt[c]=(cnt[c]||0)+1);});
-  const total=list.length;
-  box.innerHTML = `<button class="lc ${libState[kind]?"":"on"}" onclick="setLib('${kind}','')">全部流程块<span class="n">${total}</span></button>` +
-    BLOCK_ORDER.filter(c=>cnt[c]).map(c=>{
-      const m=blockMeta(c);
-      return `<button class="lc ${libState[kind]===c?"on":""}" onclick="setLib('${kind}','${c}')">${m.icon} ${esc(m.name)}<span class="n">${cnt[c]}</span></button>`;
-    }).join("");
+/* 当前流程块指示条 */
+function nowBar(cat,total,shown,kind,label){
+  const m=blockMeta(cat);
+  return `<div class="libnow">
+    <span class="nm">${m.icon} ${esc(m.name)}</span>
+    <span>· 显示 <span class="num">${shown}</span> / ${total} ${label}</span>
+    <button class="sw" onclick="scrollTo({top:document.getElementById('flowList').getBoundingClientRect().top+scrollY-80,behavior:'smooth'})">↑ 切换流程块</button>
+    <button class="sw" onclick="resetAll()">清除选择</button>
+  </div>`;
 }
-function setLib(kind,cat){
-  libState[kind]=cat; libRender();
+function placeholder(kind){
+  return `<div class="libempty"><div class="big">↑</div>先在上方选一个流程块，这里只显示属于它的内容<br>
+  <button onclick="scrollTo({top:document.getElementById('flowList').getBoundingClientRect().top+scrollY-80,behavior:'smooth'})">去选流程块</button></div>`;
+}
+function libJump(kind,cat){
+  goCat(cat);
   const sec=document.getElementById("lib"+kind[0].toUpperCase()+kind.slice(1));
   if(sec)sec.scrollIntoView({behavior:"smooth",block:"start"});
 }
-function libJump(kind,cat){ libState[kind]=cat; libRender(); const sec=document.getElementById("lib"+kind[0].toUpperCase()+kind.slice(1)); if(sec)sec.scrollIntoView({behavior:"smooth",block:"start"}); }
-function renderGrouped(kind,items,cardFn,filters){
-  const q=filters.q, cat=libState[kind];
-  const hit=items.filter(x=>{
-    if(cat && !inC(x,cat)) return false;
-    if(q && !filters.hay(x).toLowerCase().includes(q)) return false;
-    return true;
-  });
-  if(!hit.length) return {html:`<div class="fp-libempty" style="margin-top:12px">没有匹配的条目</div>`,n:0};
-  const groups={}; hit.forEach(x=>{
-    const key=Array.isArray(x.c)?x.c[0]:x.c;
-    (groups[key]=groups[key]||[]).push(x);
-  });
-  const order = cat ? [cat] : BLOCK_ORDER.filter(c=>groups[c]);
-  const html = order.map(c=>{
-    const m=blockMeta(c), arr=groups[c];
-    if(!arr||!arr.length) return "";
-    return `<div class="libgroup">
-      <h4><span class="dot" style="background:${m.color}"></span>${m.icon} ${esc(m.name)}<span class="cnt">${arr.length}</span>
-      <button class="ljump" onclick="closeFlow&&closeFlow();openFlowByCat('${c}')">查看场景卡 →</button></h4>
-      <div class="libgrid">${arr.map(cardFn).join("")}</div>
-    </div>`;
-  }).join("");
-  return {html,n:hit.length};
-}
-function openFlowByCat(cat){
-  const i=FLOWALL.findIndex(f=>f.cat===cat);
-  if(i>=0) openFlow(i);
+function renderLib(kind,items,cardFn,boxId,nowId,hitId,countId,label){
+  const cat=state.cat;
+  const box=document.getElementById(boxId), now=document.getElementById(nowId);
+  if(!cat){
+    now.innerHTML=`<div class="libnow ph">未选中流程块 · 下方不显示内容</div>`;
+    box.innerHTML=placeholder(kind);
+    document.getElementById(hitId).textContent="";
+    return;
+  }
+  const own=items.filter(x=>inC(x,cat));
+  const q=document.getElementById(kind==="skills"?"qSkills":kind==="cases"?"qCases":"qSources").value.trim().toLowerCase();
+  const hay={skills:x=>x.n+x.w+x.i+x.o+x.s+x.p+x.src,cases:x=>x.ind+x.sc+x.how+x.res+x.src,sources:x=>x.ty+x.n+x.u+x.blk+x.note}[kind];
+  const hit=own.filter(x=>!q||hay(x).toLowerCase().includes(q));
+  now.innerHTML=nowBar(cat,own.length,hit.length,kind,label);
+  box.innerHTML = hit.length
+    ? `<div class="libgrid" style="margin-top:12px">${hit.map(cardFn).join("")}</div>`
+    : `<div class="libempty">${q?"该流程块内没有匹配「"+esc(q)+"」的"+label:"该流程块暂无"+label}</div>`;
+  document.getElementById(hitId).textContent = q?`命中 ${hit.length} / ${own.length}`:`本块 ${own.length} ${label}`;
+  document.getElementById(countId).textContent = `${items.length} ${label}（24 块）`;
 }
 function libRender(){
-  /* Skills */
-  const qs=document.getElementById("qSkills").value.trim().toLowerCase();
-  const r1=renderGrouped("skills",SKILLS,x=>`<div class="libcard">
+  renderLib("skills",SKILLS,x=>`<div class="libcard">
     <h4>🧩 ${esc(x.n)}</h4>
     <div class="lrow"><span class="lk">触发场景</span><br>${esc(x.w)}</div>
     <div class="lrow"><span class="lk">输入 → 输出</span><br>${esc(x.i)} → ${esc(x.o)}</div>
     <div class="lrow"><span class="lk">步骤</span><br>${esc(x.s)}</div>
     <div class="lrow"><span class="lk">平台 / 出处</span><br>${esc(x.p)}　·　${esc(x.src)}</div>
-  </div>`,{q:qs,hay:x=>x.n+x.w+x.i+x.o+x.s+x.p+x.src});
-  document.getElementById("gridSkills").innerHTML=r1.html;
-  document.getElementById("libHitSkills").textContent = (qs||libState.skills)?`命中 ${r1.n} / ${SKILLS.length}`:`共 ${SKILLS.length} 个`;
-  document.getElementById("libCountSkills").textContent = `${SKILLS.length} 个技能`;
-
-  /* 案例 */
-  const qc=document.getElementById("qCases").value.trim().toLowerCase();
-  const r2=renderGrouped("cases",CASES,x=>`<div class="libcard">
+  </div>`,"gridSkills","nowSkills","libHitSkills","libCountSkills","个技能");
+  renderLib("cases",CASES,x=>`<div class="libcard">
     <h4><span class="badge2">${esc(x.ind)}</span>${esc(x.sc)}</h4>
     <div class="lrow"><span class="lk">做法</span><br>${esc(x.how)}</div>
     <div class="lrow"><span class="lk">结果</span><br>${esc(x.res)}</div>
     <div class="lrow"><span class="lk">出处</span><br>${esc(x.src)}</div>
-  </div>`,{q:qc,hay:x=>x.ind+x.sc+x.how+x.res+x.src});
-  document.getElementById("gridCases").innerHTML=r2.html;
-  document.getElementById("libHitCases").textContent = (qc||libState.cases)?`命中 ${r2.n} / ${CASES.length}`:`共 ${CASES.length} 个`;
-  document.getElementById("libCountCases").textContent = `${CASES.length} 个案例`;
-
-  /* 数据源 */
-  const qo=document.getElementById("qSources").value.trim().toLowerCase();
-  const r3=renderGrouped("sources",SOURCES,x=>`<div class="libcard">
+  </div>`,"gridCases","nowCases","libHitCases","libCountCases","个案例");
+  renderLib("sources",SOURCES,x=>`<div class="libcard">
     <h4><span class="badge2">${esc(x.ty)}</span>${esc(x.n)}</h4>
     <div class="lrow"><span class="lk">用途</span><br>${esc(x.u)}</div>
     <div class="lrow"><span class="lk">备注</span><br>${esc(x.note)}</div>
     <div class="lrow"><span class="lk">所属流程块</span><br>${esc(x.blk)}</div>
-  </div>`,{q:qo,hay:x=>x.ty+x.n+x.u+x.blk+x.note});
-  document.getElementById("gridSources").innerHTML=r3.html;
-  document.getElementById("libHitSources").textContent = (qo||libState.sources)?`命中 ${r3.n} / ${SOURCES.length}`:`共 ${SOURCES.length} 条`;
-  document.getElementById("libCountSources").textContent = `${SOURCES.length} 条数据源`;
-
-  buildLibChips("skills",SKILLS);
-  buildLibChips("cases",CASES);
-  buildLibChips("sources",SOURCES);
+  </div>`,"gridSources","nowSources","libHitSources","libCountSources","条数据源");
 }
 document.getElementById("qSkills").addEventListener("input",libRender);
 document.getElementById("qCases").addEventListener("input",libRender);
