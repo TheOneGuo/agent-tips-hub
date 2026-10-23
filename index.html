@@ -61,7 +61,7 @@ button{font-family:inherit}
 /* ---------- START NAV ---------- */
 .start h2{font-size:16.5px;margin-bottom:4px;color:#e8e8ff}
 .start .fhint{font-size:13px;color:#9aa0c7;margin-bottom:14px}
-.ftiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-bottom:4px}
+.ftiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:8px;margin-bottom:4px}
 .ftile{position:relative;border-radius:10px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.055);padding:10px 11px 9px;cursor:pointer;transition:.18s;text-align:left;color:#fff;width:100%}
 .ftile:hover,.ftile.open,.ftile:focus-visible{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.1)}
 .ftile .f-ico{font-size:17px;line-height:1}
@@ -153,7 +153,7 @@ footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5
 <!-- ============ HERO ============ -->
 <header class="hero">
   <div class="hero-in">
-    <span class="badge"><span class="dot"></span>覆盖 13 个平台 · 26 个工作场景 · 22 条端到端工作流 · 支持深浅色</span>
+    <span class="badge"><span class="dot"></span>覆盖 13 个平台 · 26 个工作场景 · 21 条端到端工作流 · 支持深浅色</span>
     <h1>AI Agent 使用技巧知识库<br><span class="mark">按你的工作场景与流程，查到就能用</span></h1>
     <p class="sub">别再“开着歼-20 送外卖”。这里汇总了 <b>Claude · Codex · WorkBuddy · Trae · 豆包 · Qoder · 千问办公 · Cursor · Copilot · 即梦 · 可灵 · Kimi</b> 的实战技巧——写小红书、公众号、知乎，拍 AI 电影，审合同，投广告，写代码做验收；既能按场景检索，也能按流程一步步跟着走。</p>
 
@@ -293,8 +293,7 @@ const FLOWS = [
   {name:"💬 客服与售后", cat:"service", steps:[["搭知识库","service","知识库"],["写话术提示词","service","话术"],["去掉机械感","service","机械"],["兜底与转人工","service","人工"],["沉淀话术库","service","沉淀"]]},
   {name:"📣 营销与推广", cat:"ads", steps:[["讲好品牌故事","ads","故事"],["读懂平台性格","ads","平台"],["组平台组合拳","ads","组合"],["达人共创复制","ads","达人"],["私域长效沉淀","ads","私域"]]},
   {name:"🔍 调研分析", cat:"research", steps:[["明确问题","research","主题"],["收集信息","research","调研"],["限定范围","research","范围"],["交叉核验","research","核验"],["结论溯源","research","溯源"]]},
-  {name:"⚖️ 合同审查", cat:"legal", steps:[["脱敏处理","legal","脱敏"],["三层检查","legal","三层法"],["条款标注","legal","条款"],["风险识别","legal","风险"],["修改确认","verify","修复"]]},
-  {name:"🏢 企业法务服务", cat:"legalbiz", steps:[["合同全周期","legalbiz","合同"],["用工合规","legalbiz","用工"],["知识产权与商标","legalbiz","知识产权"],["数据隐私合规","legalbiz","数据"],["纠纷与风险","legalbiz","纠纷"]]},
+  {name:"🏢 企业法务服务", cat:"legalbiz", steps:[["合同全周期","legalbiz","合同"],["审查前脱敏","legal","脱敏"],["三层检查","legal","三层法"],["条款与风险","legal","风险"],["修改与确认","verify","修复"],["用工合规","legalbiz","用工"],["知识产权与商标","legalbiz","知识产权"],["数据隐私合规","legalbiz","数据"],["纠纷与风险","legalbiz","纠纷"]]},
   {name:"👤 个人法律服务", cat:"legalpersonal", steps:[["固定证据","legalpersonal","证据"],["劳动争议","legalpersonal","劳动"],["消费维权","legalpersonal","维权"],["借贷与债务","legalpersonal","借贷"],["婚姻家庭继承","legalpersonal","继承"]]},
   {name:"🤖 自动化与定时", cat:"auto", steps:[["找重复任务","auto","重复"],["手动跑通","auto","手动"],["设定定时","auto","定时"],["接插件连接器","auto","插件"],["沉淀成技能","auto","技能"]]}
 ];
