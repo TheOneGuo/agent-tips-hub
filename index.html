@@ -61,7 +61,7 @@ button{font-family:inherit}
 /* ---------- START NAV ---------- */
 .start h2{font-size:16.5px;margin-bottom:4px;color:#e8e8ff}
 .start .fhint{font-size:13px;color:#9aa0c7;margin-bottom:14px}
-.ftiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:8px;margin-bottom:4px}
+.ftiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-bottom:4px}
 .ftile{position:relative;border-radius:10px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.055);padding:10px 11px 9px;cursor:pointer;transition:.18s;text-align:left;color:#fff;width:100%}
 .ftile:hover,.ftile.open,.ftile:focus-visible{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.1)}
 .ftile .f-ico{font-size:17px;line-height:1}
@@ -143,8 +143,9 @@ html[data-theme="dark"] .lvl-2{background:rgba(245,158,11,.18);color:#fbbf24}
 footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5px;border-top:1px solid var(--line)}
 #toTop{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:12px;border:none;background:var(--accent);color:#fff;font-size:19px;cursor:pointer;opacity:0;pointer-events:none;transition:.25s;box-shadow:0 8px 20px -6px rgba(79,70,229,.55);z-index:60}
 #toTop.show{opacity:1;pointer-events:auto}
+@media(max-width:1000px){.ftiles{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
 @media(max-width:820px){.dims{grid-template-columns:1fr}.stats-in{grid-template-columns:repeat(2,1fr)}.stat:nth-child(3),.stat:nth-child(4){border-top:1px solid var(--line);padding-top:10px}}
-@media(max-width:560px){.grid{grid-template-columns:1fr}.hero{padding:30px 16px 44px}.wrap,.groups,.chips,.meta{padding-left:16px;padding-right:16px}.gridwrap{padding:0 16px 26px}.stats{padding:0 16px}}
+@media(max-width:560px){.ftiles{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}.grid{grid-template-columns:1fr}.hero{padding:30px 16px 44px}.wrap,.groups,.chips,.meta{padding-left:16px;padding-right:16px}.gridwrap{padding:0 16px 26px}.stats{padding:0 16px}}
 </style>
 </head>
 <body>
@@ -152,7 +153,7 @@ footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5
 <!-- ============ HERO ============ -->
 <header class="hero">
   <div class="hero-in">
-    <span class="badge"><span class="dot"></span>覆盖 13 个平台 · 24 个工作场景 · 19 条端到端工作流 · 支持深浅色</span>
+    <span class="badge"><span class="dot"></span>覆盖 13 个平台 · 26 个工作场景 · 22 条端到端工作流 · 支持深浅色</span>
     <h1>AI Agent 使用技巧知识库<br><span class="mark">按你的工作场景与流程，查到就能用</span></h1>
     <p class="sub">别再“开着歼-20 送外卖”。这里汇总了 <b>Claude · Codex · WorkBuddy · Trae · 豆包 · Qoder · 千问办公 · Cursor · Copilot · 即梦 · 可灵 · Kimi</b> 的实战技巧——写小红书、公众号、知乎，拍 AI 电影，审合同，投广告，写代码做验收；既能按场景检索，也能按流程一步步跟着走。</p>
 
@@ -236,7 +237,7 @@ footer{text-align:center;padding:24px 20px 38px;color:var(--ink3);font-size:12.5
 <script>
 /* ================= 数据 ================= */
 const CATS = [
-  {id:"write",   g:"create", name:"通用写作与文档", icon:"✍️", color:"#0ea5e9"},
+  {id:"write",   g:"create", name:"通用写作与文章", icon:"✍️", color:"#0ea5e9"},
   {id:"gzh",     g:"create", name:"公众号写作",     icon:"📰", color:"#f97316"},
   {id:"xhs",     g:"create", name:"小红书写作",     icon:"🔴", color:"#e11d48"},
   {id:"zhihu",   g:"create", name:"知乎与社区问答", icon:"📕", color:"#0369a1"},
@@ -256,6 +257,8 @@ const CATS = [
   {id:"legal",   g:"biz",    name:"法务合规",       icon:"⚖️", color:"#64748b"},
   {id:"ecom",    g:"biz",    name:"电商选品",       icon:"📡", color:"#16a34a"},
   {id:"service", g:"biz",    name:"客服与售后",     icon:"💬", color:"#a21caf"},
+  {id:"legalbiz",g:"biz",    name:"企业法务服务",   icon:"🏢", color:"#1d4ed8"},
+  {id:"legalpersonal",g:"biz",name:"个人法律服务",   icon:"👤", color:"#7e22ce"},
   {id:"method",  g:"method", name:"方法论与心法",   icon:"🧠", color:"#8b5cf6"},
   {id:"plan",    g:"method", name:"目标拆解与规划", icon:"🎯", color:"#6366f1"},
   {id:"auto",    g:"method", name:"自动化与定时",   icon:"🤖", color:"#14b8a6"},
@@ -281,15 +284,18 @@ const FLOWS = [
   {name:"🎨 PPT 演示", cat:"present", steps:[["写 brief","present","受众"],["审大纲","present","大纲"],["生成初稿","present","生成"],["套版式美化","present","模板"],["三层压缩","present","三层"],["讲者备注","present","备注"],["汇报升维","present","升维"]]},
   {name:"📊 Excel 数据处理", cat:"excel", steps:[["生成公式","excel","公式"],["清洗数据","excel","清洗"],["多表汇总","excel","透视"],["合并与复用","excel","power query"],["选图呈现","excel","图表"]]},
   {name:"📈 数据分析", cat:"data", steps:[["一手数据","data","一手"],["分析指令","data","表格分析"],["结论结构","data","结论"],["复算核验","data","复算"],["汇报升维","present","升维"]]},
+  {name:"✍️ 通用写作与文章", cat:"write", steps:[["明确目标与受众","write","受众"],["动笔起草","write","草稿"],["结构与格式","write","格式"],["多轮打磨语气","write","语气"],["沉淀模板","write","沉淀"]]},
   {name:"🎬 AI 短视频", cat:"film", steps:[["脚本拆解","film","口播稿"],["分镜设计","film","分镜"],["批量生图","film","生图"],["生成视频","film","语义建构"],["配音剪辑","film","剪辑"]]},
   {name:"🎥 AI 电影", cat:"aimovie", steps:[["可拍摄脚本","aimovie","脚本"],["分镜表","aimovie","分镜表"],["角色资产","aimovie","角色"],["镜头与声音","aimovie","声音"],["观众盲审","aimovie","观众"]]},
+  {name:"💻 AI 编程与开发", cat:"code", steps:[["探索理解","code","探索"],["制定计划","plan","计划"],["规范落地","code","CLAUDE.md"],["编码实现","code","hooks"],["验证闭环","verify","验证"],["对抗审查","verify","对抗"],["交付出示证据","verify","证据"]]},
   {name:"🛒 电商选品", cat:"ecom", steps:[["解构需求","ecom","需求"],["趋势预判","ecom","趋势"],["工具验证","ecom","工具"],["利润倒推","ecom","利润"],["物流与退货","ecom","物流"]]},
   {name:"📦 电商广告投放", cat:"ecomads", steps:[["建三层数据模型","ecomads","数据模型"],["算清 ACOS 与 ROI","ecomads","ACOS"],["定向与人群","ecomads","定向"],["素材与文案","ecomads","文案"],["多平台投放差异","ecomads","平台"],["数据复盘迭代","ecomads","迭代"]]},
-  {name:"📣 营销与推广", cat:"ads", steps:[["讲好品牌故事","ads","故事"],["读懂平台性格","ads","平台"],["组平台组合拳","ads","组合"],["达人共创复制","ads","达人"],["私域长效沉淀","ads","私域"]]},
   {name:"💬 客服与售后", cat:"service", steps:[["搭知识库","service","知识库"],["写话术提示词","service","话术"],["去掉机械感","service","机械"],["兜底与转人工","service","人工"],["沉淀话术库","service","沉淀"]]},
-  {name:"⚖️ 合同审查", cat:"legal", steps:[["脱敏处理","legal","脱敏"],["三层检查","legal","三层法"],["条款标注","legal","条款"],["风险识别","legal","风险"],["修改确认","verify","修复"]]},
-  {name:"💻 AI 编程与开发", cat:"code", steps:[["理解与计划","code","探索"],["规范与实现","code","CLAUDE.md"],["验证闭环","verify","验证"],["对抗审查","verify","对抗"],["交付出示证据","verify","证据"]]},
+  {name:"📣 营销与推广", cat:"ads", steps:[["讲好品牌故事","ads","故事"],["读懂平台性格","ads","平台"],["组平台组合拳","ads","组合"],["达人共创复制","ads","达人"],["私域长效沉淀","ads","私域"]]},
   {name:"🔍 调研分析", cat:"research", steps:[["明确问题","research","主题"],["收集信息","research","调研"],["限定范围","research","范围"],["交叉核验","research","核验"],["结论溯源","research","溯源"]]},
+  {name:"⚖️ 合同审查", cat:"legal", steps:[["脱敏处理","legal","脱敏"],["三层检查","legal","三层法"],["条款标注","legal","条款"],["风险识别","legal","风险"],["修改确认","verify","修复"]]},
+  {name:"🏢 企业法务服务", cat:"legalbiz", steps:[["合同全周期","legalbiz","合同"],["用工合规","legalbiz","用工"],["知识产权与商标","legalbiz","知识产权"],["数据隐私合规","legalbiz","数据"],["纠纷与风险","legalbiz","纠纷"]]},
+  {name:"👤 个人法律服务", cat:"legalpersonal", steps:[["固定证据","legalpersonal","证据"],["劳动争议","legalpersonal","劳动"],["消费维权","legalpersonal","维权"],["借贷与债务","legalpersonal","借贷"],["婚姻家庭继承","legalpersonal","继承"]]},
   {name:"🤖 自动化与定时", cat:"auto", steps:[["找重复任务","auto","重复"],["手动跑通","auto","手动"],["设定定时","auto","定时"],["接插件连接器","auto","插件"],["沉淀成技能","auto","技能"]]}
 ];
 
@@ -756,6 +762,40 @@ T("weibo","舆情监测：让 AI 实时读懂用户心声",["通用","Kimi"],1,
   "微博是舆情的主战场：除了被动等热搜，更该主动监测。可用 AI 做实时舆情分析（基于海量公开数据看用户情绪与关注点）、跟踪搜索状态与评论列表；把高频负面评论归类后，先修产品与话术，再谈公关回应。",
   "请为【品牌/产品】设计微博舆情监测方案：1）需要盯的关键词与竞品词清单；2）负面评论的分类标准（产品/服务/价格/物流/公关）；3）用 AI 做每日舆情摘要的提示词（输出：声量、情绪分布、Top3 负面、建议动作）；4）什么信号需要人工升级处理。"),
 
+/* ===== 企业法务服务 ===== */
+T("legalbiz","合同全生命周期管理：起草到归档的六个节点",["Claude","Kimi","WorkBuddy"],1,
+  "企业法务的核心不是审单份合同，而是管住全生命周期：起草（用标准模板库）→ 审批（按金额/风险分级授权）→ 签署（主体与盖章核验）→ 履约（节点提醒与验收留痕）→ 归档（可检索的台账）→ 到期续签或终止。让 AI 基于合同台账找出临期合同、缺失附件与异常条款，比法务逐份翻更快。",
+  "这是我们的合同台账【粘贴】。请：1）按起草/审批/签署/履约/归档/到期六个节点标注当前存在的问题；2）列出 10 个最需要立即跟进的合同及原因；3）给出每份的下一个动作与责任人角色；4）输出一份可复用的合同审查清单（按合同类型各 5 条要点）。"),
+T("legalbiz","用工合规：五个最容易踩坑的环节",["Claude","Kimi","通用"],1,
+  "用工合规的高频雷区有五个：劳动合同签订与试用期长度、规章制度需经民主程序（讨论并公示）才生效、社保公积金是否足额缴纳、加班与竞业限制的约定方式、以及 AI 参与管理时的边界（不得用算法直接做处分决定）。用 AI 出一份自查清单，比事后仲裁被动得多。",
+  "请为【公司类型/规模】生成一份用工合规自查清单，覆盖：1）劳动合同签订与试用期；2）规章制度民主程序与公示留痕；3）社保公积金；4）加班与竞业限制；5）AI 用于人事管理时的边界。每项给出合规做法、常见风险点与留痕材料。"),
+T("legalbiz","知识产权与商标：注册、监测与开源许可",["Claude","Kimi","通用"],1,
+  "企业 IP 防线三条线并行：①商标——按类别与防御性注册布局核心类别，做好近似检索；②专利与著作权——职务作品归属与发明奖励要在合同里写清；③侵权应对——第一时间固定证据（公证、购买记录、网页存证）。对技术公司还要额外审开源许可：MIT/Apache 与 GPL/AGPL 的义务完全不同，别让公司代码踩了传染性协议。",
+  "请为【公司/产品】做一份知识产权与开源合规方案：1）商标注册类别与防御布局建议；2）专利与职务作品归属需在劳动合同/合作协议中写清的条款；3）我们项目使用的开源组件（清单见附件）各自的许可义务与风险；4）发现侵权时的证据固定与处置流程。"),
+T("legalbiz","数据与隐私合规：授权、出境与 AI 训练",["Claude","Kimi","通用"],2,
+  "数据合规三件事必须落纸面：①处理个人信息的合法性基础与告知同意（隐私政策、同意机制、单独同意场景）；②数据跨境传输的合法路径与备案要求；③用 AI 处理内部数据时的边界——哪些数据不得进公共模型、供应商是否留存与训练、能否签数据处理协议。让 AI 出合规差距清单，比上线后再补要便宜得多。",
+  "请为我们的产品做数据与隐私合规评估：1）梳理涉及个人信息的处理场景与合法性基础；2）指出告知同意机制的缺口；3）若涉及数据出境，列出需要走的路径与文件；4）给出“哪些内部数据禁止上传公共大模型”的分类规则与替代方案（如私有化部署/脱敏）。"),
+T("legalbiz","纠纷分级与风险敞口：先算钱再谈打法",["Kimi","Claude","通用"],1,
+  "纠纷处理先做分级：金额小、事实清楚的可自行协商；涉及合同违约与商业机密的需要律师介入；可能引发群体性或行政风险的必须第一时间固定证据并统一对外口径。让 AI 基于合同与证据做诉前分析（争点、举证责任、时效、可能成本与收益），再决定要不要打。",
+  "这是【纠纷情况说明】。请做诉前分析：1）争点梳理（我方主张/对方可能的抗辩）；2）关键证据清单（现有/缺失）；3）时效与程序节点提醒；4）成本收益测算（标的额、可能成本、时间成本）；5）给出“协商/调解/诉讼/仲裁”的建议路径与理由。"),
+
+/* ===== 个人法律服务 ===== */
+T("legalpersonal","第一步：把证据固定下来",["通用","Claude"],0,
+  "无论什么纠纷，第一步都是把事实和证据固定：合同或协议原件、付款与转账记录、聊天与邮件原始记录、录音（注意合法性）、产品或损害照片。留存要点：保留原始载体与账号、不要只留截图（可录屏展示时间线）、重要证据可考虑公证或时间戳。律师或仲裁机构最先问的就是证据。",
+  "我的纠纷是【简述】。请帮我：1）列出这个纠纷需要收集的全部证据类型；2）每类证据的取证方法与合法性注意点；3）每份证据的保存方式（原始件/备份/公证/时间戳）；4）给我一份按时间顺序的证据清单模板。"),
+T("legalpersonal","劳动争议：离职、加班与社保",["通用","Claude","Kimi"],1,
+  "劳动者最常踩的五件事：①离职通知方式与交接（口头辞退风险最高）；②加班事实的证明（打卡、审批、聊天记录）；③违法解除的赔偿金计算（2 倍经济补偿）；④社保未足额缴纳；⑤竞业限制与保密协议的边界。关键在证据链与时点——仲裁时效通常为离职后一年，别等。",
+  "我和前公司的争议是【简述】。请帮我：1）列出可主张的诉求及各自的法律依据；2）我方需要准备的证据（尤其是加班与薪资部分）；3）时效与关键时间节点提醒；4）协商、调解、仲裁三种路径的成本与利弊对比；5）一封给前公司的沟通函要点。"),
+T("legalpersonal","消费维权：按顺序升级的六条路",["通用","Claude"],1,
+  "维权不是只有起诉，顺序升级成本更低：①与商家协商；②平台投诉与平台介入；③12315 投诉（可同时发起行政举报）；④消费者协会或调解组织；⑤律师函（常能直接促成解决）；⑥诉讼。涉及虚假宣传、欺诈可主张退一赔三；网购还有 7 日无理由退货等制度作为底座。",
+  "我的消费纠纷是【简述，涉及商家与金额】。请给出：1）按“协商→平台→12315→消协/监管→律师函→诉讼”给出逐级方案与每级预期成本；2）我能主张的赔偿项目与计算方式；3）每一步需要的材料；4）一封 12315 投诉要点模板。"),
+T("legalpersonal","借贷与债务：借条要素与利息红线",["通用","Claude"],1,
+  "个人借贷最容易输在两处：一是借条要素缺失（借款人姓名身份证号、金额大小写、还款日期、利息约定、签字按印）；二是利息与违约金超过司法保护上限（通常以 LPR 的 4 倍为界，超出部分不受支持）。另外要管好征信：逾期与失信被执行人会影响后续贷款、乃至子女入学就业。",
+  "有一笔【金额】的借贷纠纷/或我需要借出/借入一笔钱。请：1）出一份要素完整的借条/欠条模板（写清哪些字段必须手写、哪些容易出争议）；2）说明利率与违约金的法律上限与计算方式；3）给出还款与催收的留痕方式（含催收记录的规范表述）；4）列出常见无效条款清单。"),
+T("legalpersonal","婚姻家庭与继承：三个最易争的财产问题",["通用","Claude","Kimi"],1,
+  "家庭纠纷的高频争点集中在三处：夫妻共同财产的认定与分割（原则上均等分割，但照顾子女、女方与无过错方权益）；离婚协议的效力（财产与抚养条款可变更，忠诚协议的效力存在争议）；继承的法定顺序与份额（第一顺序为配偶、子女、父母；份额一般均等，存在尽主要扶养义务等情形可多分）。复杂情形务必请专业律师出意见。",
+  "我的家庭财产情况是【简述】。请帮我：1）梳理可能涉及的法律关系与争点；2）哪些财产可能属于夫妻共同财产；3）继承情形下的法定顺序与份额大致如何；4）离婚协议或遗嘱形式上要注意什么（形式要件与常见无效情形）；5）哪些问题必须找专业律师、哪些可以先自行协商。"),
+
 /* ===== 方法论与心法 ===== */
 T("method","追问终极目标：从“改 bug”升维到“零崩溃”",["Claude","通用"],2,
   "Anthropic 工程负责人 Felix Rieseberg 的亲身经历：他从“让 Claude 修一个又一个应用崩溃”升维为一句指令——“让我们的客户端应用持续保持零崩溃”。为此他给 Claude 配备了拉取崩溃报告的权限、版本号到 Git commit 的自动映射、三套系统测试环境，让 Claude 自主复现、修复、验证、提交。把抽象层级拉高，才能构建真正解放人类的自动化工作流。",
@@ -1011,7 +1051,7 @@ function copyText(btn,id){
 }
 
 /* start nav：17 个场景全部内容块；流程块悬停展开步骤浮层，其余直达 */
-const MORE = ["verify","method","plan","write","context"];
+const MORE = ["context","plan","method"];
 document.getElementById("flowList").innerHTML =
   FLOWS.map((f,i)=>{
     const icon = f.name.split(" ")[0], label = f.name.replace(/^\S+\s/,"");
